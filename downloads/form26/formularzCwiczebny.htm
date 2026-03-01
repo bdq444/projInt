@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <title>Formularz ćwiczebny</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!--Meta zapewniająca lepsze wyświetlanie na urządzeniach mobilnych-->
+</head>
+
+<body style="font-family: Arial, sans-serif; margin: 20px; line-height: 1.4;">
+
+<h1 style="margin: 0 0 10px 0;">Formularz na potrzeby INIBu</h1>
+<p style="margin: 0 0 16px 0; color: #555;">
+  Zawiera: Inline style CSS, <strong>datalist</strong>, <strong>fieldset</strong>, fokus przez <strong>onfocus/onblur</strong> i szczyptę JavaScriptu (podgląd oraz eksport TXT).
+</p>
+
+<form id="demoForm">
+
+  <!-- DANE OSOBOWE -->
+	<fieldset style="margin-bottom: 16px; padding: 12px; border-radius: 12px;">
+		<legend style="font-weight: bold;">Dane osobowe</legend>
+		<label style="display: block; margin-top: 8px;" >
+			Imię:<span style="color: red; ">*</span>
+			<input required autofocus type="text" name="name" style="display: block; width: 100%; max-width: 420px; margin-top: 4px; padding: 8px; border-radius: 10px;" onfocus="this.style.backgroundColor='lightcoral';" onblur="this.style.backgroundColor= 'white';" />
+		</label>
+		<label style="display: block; margin-top: 8px;">
+			Nazwisko: <span style="color: red; ">*</span>
+			<input required type="text" name="surname" style="display: block; width: 100%; max-width: 420px; margin-top: 4px; padding: 8px; border-radius: 10px;" onfocus="this.style.backgroundColor='lightcoral';" onblur="this.style.backgroundColor= 'white';" />
+		</label>
+		<label style="display: block; margin-top: 8px;">
+			Płeć:
+			<input type="text" name="gender" list="listaPuci" style="display: block; width: 100%; max-width: 420px; margin-top: 4px; padding: 8px; border-radius: 10px;" onfocus="this.style.backgroundColor='lightcoral';" onblur="this.style.backgroundColor= 'white';" />
+			<datalist id="listaPuci">
+				<option value="kobieta"></option>
+				<option value="mężczyzna"></option>
+				<option value="inna"></option>
+				<option value="nie wiem"></option>
+			</datalist>
+		</label>		
+		<label style="display: block; margin-top: 8px;">
+			Rok urodzenia:
+			<input name="birthyear" type="number" min="1961" max="2026" style="display: block; width: 100%; max-width: 420px; margin-top: 4px; padding: 8px; border-radius: 10px;" onfocus="this.style.backgroundColor='lightcoral';" onblur="this.style.backgroundColor= 'white';" />
+		
+	</fieldset>
+
+  <!-- DANE KONTAKTOWE -->
+	<fieldset style="margin-bottom: 16px; padding: 12px; border-radius: 12px;">
+		<legend style="font-weight: bold;">Dane kontaktowe</legend>
+		<label style="display: block; margin-top: 8px;" >
+			E-mail:<span style="color: red; ">*</span>
+			<input required type="email" name="email" placeholder="np. jan.kowalski@amu.edu.pl" style="display: block; width: 100%; max-width: 420px; margin-top: 4px; padding: 8px; border-radius: 10px;" onfocus="this.style.backgroundColor='lightcoral';" onblur="this.style.backgroundColor= 'white';" />
+		</label>
+		<label style="display: block; margin-top: 8px;">
+			Miasto:
+			<input type="text" name="city" list="listaMiast" placeholder="Wpisz miejscowość lub wybierz z listy..." style="display: block; width: 100%; max-width: 420px; margin-top: 4px; padding: 8px; border-radius: 10px;" onfocus="this.style.backgroundColor='lightcoral';" onblur="this.style.backgroundColor= 'white';" />
+			<datalist id="listaMiast">
+				<option value="Kalisz"></option>
+				<option value="Bochnia"></option>
+				<option value="Iwanowice"></option>
+				<option value="Ostróda"></option>
+				<option value="Poznań"></option>
+				<option value="Lądek Zdrój"></option>
+			</datalist>
+		</label>
+		<label style="display: block; margin-top: 8px;">
+			Państwo:
+			<input type="text" name="country" list="listaKrajów" placeholder="Wpisz kraj lub wybierz z listy..." style="display: block; width: 100%; max-width: 420px; margin-top: 4px; padding: 8px; border-radius: 10px;" onfocus="this.style.backgroundColor='lightcoral';" onblur="this.style.backgroundColor= 'white';" />
+			<datalist id="listaKrajów">
+				<option value="NRD"></option>
+				<option value="Bazylia"></option>
+				<option value="ZSRR"></option>
+				<option value="USA"></option>
+				<option value="PRL"></option>
+				<option value="Królestwo SHS"></option>
+				<option value="CSRS"></option>
+			</datalist>
+		</label>
+		<label style="display: block; margin-top: 8px;">
+			Telefon:
+			<input type="tel" name="phone" placeholder="np. +48 123 456 789..." style="display: block; width: 100%; max-width: 420px; margin-top: 4px; padding: 8px; border-radius: 10px;" onfocus="this.style.backgroundColor='lightcoral';" onblur="this.style.backgroundColor= 'white';" />
+
+		</label>
+	</fieldset>
+  <!-- ZAINTERESOWANIA -->
+	<fieldset style="margin-bottom: 16px; padding: 12px; border-radius: 12px;">
+		<legend style="font-weight: bold;">Zainteresowania</legend>
+		<label style="display: block; margin-top: 8px;">
+			Dziedzina zainteresowań:
+			<input type="text" name="discipline" list="listaDziedzin" placeholder="Wpisz hobby lub wybierz z listy..." style="display: block; width: 100%; max-width: 420px; margin-top: 4px; padding: 8px; border-radius: 10px;" onfocus="this.style.backgroundColor='lightcoral';" onblur="this.style.backgroundColor= 'white';" />
+			<datalist id="listaDziedzin">
+				<option value="robótki ręczne"></option>
+				<option value="oglądanie filmów"></option>
+				<option value="stolarka"></option>
+				<option value="pisanie wierszy"></option>
+				<option value="czytanie JapanisVisualNovel"></option>
+				<option value="czarne pigułki"></option>
+				<option value="pisanie formuł w Excelu"></option>
+			</datalist>
+		</label>
+		<label style="display: block; margin-top: 8px;">
+			Poziom zaawansowania:
+			<input type="text" name="level" list="listaPoziomów" placeholder="Wpisz poziom zaawansowania lub wybierz z listy..." style="display: block; width: 100%; max-width: 420px; margin-top: 4px; padding: 8px; border-radius: 10px;" onfocus="this.style.backgroundColor='lightcoral';" onblur="this.style.backgroundColor= 'white';" />
+			<datalist id="listaPoziomów">
+				<option value="początkujący"></option>
+				<option value="średniozaawansowany"></option>
+				<option value="zaawansowany"></option>
+				<option value="ekspert"></option>
+				<option value="wymiatacz"></option>
+				<option value="guru"></option>
+				<option value="pan Karol"></option>				
+
+			</datalist>
+		</label>
+		<label style="display: block; margin-top: 8px;">
+			Ulubione urządzenie:
+			<input type="text" name="device" list="listaUrządzeń" placeholder="Wpisz ulubione urządzenie lub wybierz z listy..." style="display: block; width: 100%; max-width: 420px; margin-top: 4px; padding: 8px; border-radius: 10px;" onfocus="this.style.backgroundColor='lightcoral';" onblur="this.style.backgroundColor= 'white';" />
+			<datalist id="listaUrządzeń">
+				<option value="naparstek"></option>
+				<option value="telewizor"></option>
+				<option value="gwoździe"></option>
+				<option value="mózg"></option>
+				<option value="mydłoORAZwoda"></option>
+				<option value="bon na liposukcje"></option>
+				<option value="książka o Excelu"></option>
+				<option value="pieniądze"></option>
+			</datalist>
+		</label>		
+	</fieldset>
+
+  <!-- CHECKBOXY -->
+	<fieldset style="margin-bottom: 16px; padding: 12px; border-radius: 12px;">
+		<legend style="font-weight: bold;">Preferencje (wybór wielokrotny - checkbox)</legend>
+
+		<label style="display: block; margin-top: 6px;">
+			<input type="checkbox" name="prefs" value="newsletter" style="margin-right: 6px;"/>
+			Chcę otrzymywać newsletter.
+		</label>
+		<label style="display: block; margin-top: 6px;">
+			<input type="checkbox" name="prefs" value="sms" style="margin-right: 6px;"/>
+			Zgoda na kontakt SMS.
+		</label>
+		<label style="display: block; margin-top: 6px;">
+			<input type="checkbox" name="prefs" value="badanie" style="margin-right: 6px;"/>
+			Zgoda na udział w badaniu ankietowym.
+		</label>		
+	</fieldset>
+  <!-- RADIO -->
+	<fieldset style="margin-bottom: 16px; padding: 12px; border-radius: 12px;">
+		<legend style="font-weight: bold;">Kanał kontaktu (wybór pojedynczy - radio)</legend>
+		<label style="display: block; margin-top: 6px;">
+			<input type="radio" name="contact_channel" value="email" style="margin-right: 6px;" checked />
+			E-mail
+		</label>
+		<label style="display: block; margin-top: 6px;">
+			<input type="radio" name="contact_channel" value="telefon" style="margin-right: 6px;"  />
+			Telefon
+		</label>
+		<label style="display: block; margin-top: 6px;">
+			<input type="radio" name="contact_channel" value="sms" style="margin-right: 6px;"  />
+			SMS
+		</label>
+	</fieldset>
+  <!-- UWAGI -->
+	<fieldset style="margin-bottom: 16px; padding: 12px; border-radius: 12px;">
+		<legend style="font-weight: bold;">Uwagi</legend>
+		<label style="display: block; margin-top: 8px;">
+			Komentarz
+			<textarea name="notes" rows="4" style="display: block; width: 100%; max-width: 600px; margin-top: 4px; padding: 8px; border-radius: 10px;" onfocus="this.style.backgroundColor='lightcoral';" onblur="this.style.backgroundColor= 'white';"></textarea>
+		</label>
+	</fieldset>
+  <!-- PODGLĄD + EKSPORT -->
+	<fieldset style="margin-bottom: 16px; padding: 12px; border-radius: 12px;">
+		<legend style="font-weight: bold;">Zebrane dane (podgląd)</legend>
+
+			<textarea id="preview" readonly rows="10" style="display: block; width: 100%; max-width: 880px; padding: 8px; border-radius: 10px; font-family: monospace;" ></textarea>
+<div style="margin-top:8px;">
+      <button type="button" id="exportTxt" style="padding:6px 10px;">Eksport do TXT</button>
+    </div>
+	</fieldset>
+  <!-- PRZYCISKI STERUJĄCE-->
+	<div style="margin-top: 12px;">
+		<button type="submit" style="padding: 8px 14px;">Wyślij</button>
+		<button type="reset" style="padding: 8px 14px; margin-left: 6px;">Wyczyść</button>
+	</div>
+</form>
+
+<!--PODŁĄCZENIE JS-->
+	<script src="formularz.js"></script>
+</body>
+</html>
