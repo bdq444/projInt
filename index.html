@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="balwan.svg" type="image/x-icon">
+
+  <title>CSS: potęga kodowania</title>
+  <style>
+    :root {
+      --bg: #0a7075;
+      --bg2: #0c969c;
+      --panel: #6ba3be;
+      --panel-strong: #274d60;
+      --line: #8a7c8a;
+      --text: #4d3f72;
+      --muted: #065f89;
+      --accent: #79a8ff;
+      --accent-2: #065f89;
+      --warm: #ffb86b;
+      --bad: #ff7780;
+      --good: #65e2a3;
+      --shadow: 0 24px 80px rgba(0,0,0,.28);
+      --radius: 22px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 10% 10%, rgba(121,168,255,.28), transparent 28%),
+        radial-gradient(circle at 90% 15%, rgba(120,240,213,.15), transparent 24%),
+        linear-gradient(180deg, #98f8dd 0%, #aae3c1 48%, #bde39e 100%);
+      min-height: 100vh;
+    }
+    a { color: inherit; }
+    .wrap {
+      width: min(1180px, calc(100vw - 48px));
+      margin: 0 auto;
+    }
+    header.hero {
+      padding: 36px 0 18px;
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(14px);
+      background: linear-gradient(180deg, #983A66, #ff4d4d);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-weight: 700;
+      letter-spacing: .02em;
+    }
+    .logo {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, #c72928, #ffcccd);
+      color: #07111f;
+      box-shadow: var(--shadow);
+      font-weight: 900;
+    }
+    .navlinks {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .navlinks a {
+      text-decoration: none;
+      color: #065f89;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      transition: .2s ease;
+    }
+    .navlinks a:hover,
+    .navlinks a:focus-visible {
+      color: var(--text);
+      border-color: var(--line);
+      background: rgba(255,255,255,.06);
+      outline: none;
+    }
+    main { padding: 28px 0 64px; }
+    section {
+      margin: 26px 0;
+      padding: 34px;
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.06));
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+    }
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: .15em;
+      color: var(--accent-2);
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+    h1,h2,h3,p { margin: 0; }
+    h1 {
+      font-size: clamp(40px, 6vw, 74px);
+      line-height: .96;
+      max-width: 10ch;
+      margin-bottom: 18px;
+    }
+    h2 {
+      font-size: clamp(28px, 4vw, 42px);
+      line-height: 1.02;
+      margin-bottom: 10px;
+    }
+    .lede, .sub {
+      margin-left: 1rem;
+      margin-top: 2rem;
+      color: var(--muted);
+      line-height: 1.65;
+      max-width: 70ch;
+      /*font-size: 24px;*/
+      font-size: 1.4rem;
+    }
+    .hero-grid,
+    .grid-2,
+    .grid-3 {
+      display: grid;
+      gap: 24px;
+      align-items: start;
+    }
+    .hero-grid { grid-template-columns: .85fr 1.25fr; margin-top: 24px; }
+    .grid-2 { grid-template-columns: 1fr 1fr; }
+    .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .panel {
+      background: rgba(11,16,32,.56);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: var(--radius);
+      padding: 22px;
+      overflow: hidden;
+    }
+    div li {
+      margin-bottom: 10px;
+    }
+    div li a {
+      color: blue;
+    }
+    button a {
+      color: black;
+    }
+    .panel h3 { font-size: 22px; margin-bottom: 12px; }
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+    .chip {
+      padding: 9px 12px;
+      border-radius: 999px;
+      background: #d3f485;
+      border: 1px solid rgba(255,255,255,.1);
+      color: var(--text);
+      font-size: 14px;
+    }
+    .new {
+      padding: 3px 10px;
+      border-radius: 999px;
+      background: white;
+      border: 1px solid rgba(255,255,255,.1);
+      color: red;
+      font-size: 14px;
+    }
+    .butt {
+      cursor: pointer;
+      box-shadow: 0 4px 0 #2f57b8, 0 6px 14px rgba(0,0,0,0.15);
+      transform: translateY(-4px);
+      transition: transform 0.1s ease, box-shadow 0.1s ease, filter 0.1s ease;
+    }
+    .butt:hover {
+      filter: brightness(1.05);
+    }
+
+    .butt:active {
+      transform: translateY(4px);
+      box-shadow: 0 1px 0 #2f57b8, 0 2px 6px rgba(0,0,0,0.12);
+    }
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 18px;
+    }
+    .ui-btn, .link-card {
+      transition: transform .2s ease, background .2s ease, border-color .2s ease, box-shadow .2s ease;
+    }
+    .ui-btn {
+      border: none;
+      border-radius: 16px;
+      padding: 14px 18px;
+      font-weight: 700;
+      font-size: 15px;
+      background: linear-gradient(135deg, #7aa9ff, #79efd4);
+      color: #081221;
+      cursor: pointer;
+      box-shadow: 0 10px 24px rgba(121,168,255,.25);
+    }
+    .ui-btn.secondary {
+      background: rgba(255,255,255,.08);
+      color: var(--text);
+      border: 1px solid rgba(255,255,255,.14);
+      box-shadow: none;
+    }
+    .ui-btn:hover { transform: translateY(-2px); }
+    .ui-btn:active { transform: translateY(1px) scale(.99); }
+    .ui-btn:focus-visible {
+      outline: 3px solid rgba(120,240,213,.9);
+      outline-offset: 3px;
+    }
+    .link-card {
+      display: block;
+      padding: 18px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,.1);
+      background: rgba(255,255,255,.05);
+      text-decoration: none;
+      color: var(--text);
+      min-height: 120px;
+    }
+    .link-card:hover {
+      border-color: rgba(121,168,255,.6);
+      background: rgba(121,168,255,.12);
+      transform: translateY(-2px);
+    }
+    .link-card:visited { color: #ced8ff; }
+    .link-card:focus-visible {
+      outline: 3px solid rgba(255,184,107,.95);
+      outline-offset: 3px;
+    }
+    .demo-browser {
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 24px;
+      padding: 18px;
+      position: relative;
+    }
+    .browser-top {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .dots { display: flex; gap: 8px; }
+    .dots span {
+      width: 10px; height: 10px; border-radius: 50%; display: inline-block;
+      background: rgba(255,255,255,.35);
+    }
+    .address {
+      flex: 1; padding: 10px 14px; border-radius: 999px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.08);
+    }
+    .state-list { display: grid; gap: 12px; margin-top: 14px; }
+    .state-item {
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      padding: 16px; border-radius: 18px; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.08);
+    }
+    .state-item strong { font-size: 17px; }
+    .state-item small { color: var(--muted); }
+    .state-item:hover { background: rgba(121,168,255,.10); }
+    .state-item:has(.mini-toggle:checked) { border-color: rgba(120,240,213,.55); }
+    .mini-toggle { width: 22px; height: 22px; accent-color: #79efd4; }
+    .code {
+      margin-top: 16px;
+      padding: 18px 20px;
+      background: rgba(6,10,20,.94);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 20px;
+      overflow: auto;
+      color: #dbe6ff;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      line-height: 1.6;
+      font-size: 14px;
+      white-space: pre-wrap;
+    }
+    .code .selector { color: #79efd4; }
+    .code .prop { color: #8fb7ff; }
+    .code .val { color: #ffd289; }
+    .code .comment { color: #7f8aad; }
+    .form-grid { display: grid; gap: 14px; margin-top: 18px; }
+    .field {
+      display: grid; gap: 8px;
+    }
+    .field label { font-weight: 650; }
+    .field input, .field select {
+      width: 100%;
+      padding: 14px 15px;
+      border-radius: 16px;
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+      border: 1px solid rgba(255,255,255,.12);
+      transition: border-color .2s ease, box-shadow .2s ease, background .2s ease;
+    }
+    .field input::placeholder { color: #91a0c5; }
+    .field input:focus-visible, .field select:focus-visible {
+      outline: none;
+      border-color: rgba(121,168,255,.85);
+      box-shadow: 0 0 0 4px rgba(121,168,255,.18);
+    }
+    .field input:required { border-left: 4px solid var(--warm); }
+    .field input:valid { border-color: rgba(101,226,163,.7); background: rgba(101,226,163,.08); }
+    .field input:invalid:not(:placeholder-shown) { border-color: rgba(255,119,128,.82); background: rgba(255,119,128,.08); }
+    .field input:disabled { opacity: .55; cursor: not-allowed; }
+    .prefs {
+      display: flex; flex-wrap: wrap; gap: 12px; margin-top: 8px;
+    }
+    .check {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 12px 14px; border-radius: 16px; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1);
+    }
+    .check:has(input:checked) {
+      border-color: rgba(120,240,213,.65);
+      background: rgba(120,240,213,.12);
+    }
+    .check input { accent-color: #79efd4; }
+    .table-demo {
+      margin-top: 18px;
+      display: grid;
+      gap: 10px;
+    }
+    .row {
+      display: grid;
+      grid-template-columns: 58px 1fr auto;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 16px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.04);
+    }
+    .row:nth-child(odd) { background: rgba(121,168,255,.08); }
+    .row:first-child { border-color: rgba(255,184,107,.45); }
+    .row:last-child { border-color: rgba(120,240,213,.45); }
+    .badge {
+      display: inline-flex; align-items: center; justify-content: center;
+      min-width: 42px; padding: 8px 10px; border-radius: 999px; background: rgba(255,255,255,.1);
+    }
+    .grid-cards {
+      margin-top: 18px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+    .card {
+      padding: 18px;
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.05);
+    }
+    .card:not(.compact) { min-height: 170px; }
+    .card:first-child { background: linear-gradient(180deg, rgba(121,168,255,.18), rgba(255,255,255,.05)); }
+    .card:has(.meta .tag.hot) { border-color: rgba(255,184,107,.55); }
+    .meta { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border-radius: 999px;
+      padding: 8px 10px;
+      background: rgba(255,255,255,.08);
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .tag.hot { background: rgba(255,184,107,.16); color: #ffdbac; }
+    .tag.ok { background: rgba(101,226,163,.16); color: #c6ffe0; }
+    .callout {
+      margin-top: 18px;
+      padding: 18px 20px;
+      border-radius: 22px;
+      background: linear-gradient(135deg, rgba(121,168,255,.16), rgba(120,240,213,.10));
+      border: 1px solid rgba(255,255,255,.12);
+    }
+    .tips { display: grid; gap: 12px; margin-top: 16px; }
+    .tip {
+      padding: 16px 18px; border-radius: 18px; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.08);
+    }
+    .tip strong { display: block; margin-bottom: 6px; }
+    footer {
+      color: var(--muted);
+      text-align: center;
+      padding: 14px 0 6px;
+      font-size: 14px;
+    }
+    @media (max-width: 900px) {
+      .hero-grid, .grid-2, .grid-3, .grid-cards { grid-template-columns: 1fr; }
+      .wrap { width: min(100vw - 28px, 1180px); }
+      section { padding: 24px; }
+      header.hero { position: static; }
+    }
+    @media print {
+      header.hero { position: static; }
+      body { background: #fff; color: #111; }
+      section, .panel { box-shadow: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="wrap nav">
+      <div class="brand"><div class="logo">{:;}</div> CSS: potęga kodowania</div>
+      <nav class="navlinks" aria-label="Sekcje">
+        <a href="#intro">Pliki</a>
+        <a href="#stany">Przewodniki</a>
+        <a href="#formularze">Narzędzia</a>
+        <a href="#struktura">Tutoriale</a>
+        <a href="#nowoczesne">Praktyka</a>
+        <a href="#praktyka">Dodatkowe</a>
+      </nav>
+    </div>
+  </header>
+  
+  <main class="wrap">
+    <div id="intro"><br/><br/><br/><br/></div>
+    <!--Pierwszy panel-->
+    <section >
+      <div class="kicker">1 / plikownia / </div>
+      <div class="hero-grid">
+        <div>
+          <h1>Pliki do pobrania</h1>
+          <p class="lede">Te pliki znajdą zastosowanie na zajęciach. Prędzej czy później...</p>
+          <!--
+          <div class="chips">
+            <span class="chip">Tu bym wstawił linki</span>
+            <span class="chip">:focus-visible</span>
+            <span class="chip">:checked</span>
+            <span class="chip">:nth-child()</span>
+            <span class="chip">:not()</span>
+            <span class="chip">:is()</span>
+            <span class="chip">:where()</span>
+            
+          </div>
+          to dawac przy swieżo wprowadzonej rzeczy> <span class="new">Nowość!</span>
+          -->
+        </div>
+          <div>
+            <div>
+              <ul>
+                <li>Zaległy plik do formularza 2026 [HTM] <button class="chip butt"><a href="downloads/form26/formularzCwiczebny.htm" download>Pobierz</a></button></li>
+                <li>Zestawienie encji [XLSX] <button class="chip butt"><a href="downloads/encje.xlsx" download>Pobierz</a></button></li>
+                <li>Zestaw obrazów JPEG w różnych rozmiarach [ZIP] <button class="chip butt"><a href="downloads/foto_responsywne.zip" download>Pobierz</a></button></li>
+                
+                <li>Zestaw obrazów w nowych formatach [ZIP] <button class="chip butt"><a href="downloads/imgNowe.zip" download>Pobierz</a></button></li>
+                <li>Zestaw ćwiczebny do selektorów CSS [ZIP] <button class="chip butt"><a href="downloads/kurs/selektory.zip" download>Pobierz</a></button></li>
+                
+              </ul>
+            </div>
+          </div>
+          <div class="callout">
+            <strong>Ostatnia aktualizacja:</strong> 5.04.2026
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+  <div id="stany"><br/><br/><br/><br/></div>
+    <!--Drugi panel-->
+    <section >
+      <div class="kicker">2 / przewodniki / </div>
+      <div class="hero-grid">
+        <div>
+          <h1>Przewodniki</h1>
+          <p class="lede">Nieco bardziej rozbudowane omówienia ważnych elementów CSS...</p>
+          <!--
+          <div class="chips">
+            <span class="chip">Tu bym wstawił linki</span>
+            <span class="chip">:focus-visible</span>
+            <span class="chip">:checked</span>
+            <span class="chip">:nth-child()</span>
+            <span class="chip">:not()</span>
+            <span class="chip">:is()</span>
+            <span class="chip">:where()</span>
+            
+          </div>
+          -->
+        </div>
+          <div>
+            <div>
+              <ul>
+                <li>Miary CSS [PDF] <button class="chip butt"><a href="downloads/przewodniki/MiaryCSS.pdf" download>Pobierz</a></button></li>
+                <li>Selektory CSS - zestawienie [PDF] <button class="chip butt"><a href="downloads/przewodniki/Selektory_zestawienie.pdf" download>Pobierz</a></button></li>
+              </ul>
+            </div>
+          </div>
+          <div class="callout">
+            <strong>Ostatnia aktualizacja:</strong> 6.04.2026
+          </div>
+        </div>
+      </div>
+    </section>
+
+  <div id="formularze"><br/><br/><br/><br/></div>
+    <!--Trzeci panel-->
+    <section >
+      <div class="kicker">3 / narzędzia / </div>
+      <div class="hero-grid">
+        <div>
+          <h1>Narzędzia</h1>
+          <p class="lede">Linki do interesujących narzędzi internetowych, ułatwiających kodowanie...</p>
+          <!--
+          <div class="chips">
+            <span class="chip">Tu bym wstawił linki</span>
+            <span class="chip">:focus-visible</span>
+            <span class="chip">:checked</span>
+            <span class="chip">:nth-child()</span>
+            <span class="chip">:not()</span>
+            <span class="chip">:is()</span>
+            <span class="chip">:where()</span>
+            
+          </div>
+          -->
+        </div>
+          <div>
+            <div>
+              <ul>
+                <li>Zestawienie znaków nieoczywistych z podziałem na sekcje <a href="https://symbol.so/" target="_blank" rel="noopener noreferrer">Text symbols - copy and paste</a></li>
+                <li>Biblioteka animacji CSS <a href="https://animista.net/play/basic" target="_blank" rel="noopener noreferrer">Animista.net</a></li>
+                <li>Zestawienie przydatnych narzędzi, wspierających kodera <a href="https://www.fffuel.co/" target="_blank" rel="noopener noreferrer">free web-design tools</a></li>
+                <li>Edytor kodu online <a href="https://codepen.io/" target="_blank" rel="noopener noreferrer">CodePen</a></li>
+                <li>Inny edytor kodu online (dla mnie ciekawszy) <a href="https://jsfiddle.net/" target="_blank" rel="noopener noreferrer">JSFiddle</a></li>
+                <li>Generator gradientów Josha <a href="https://www.joshwcomeau.com/gradient-generator/" target="_blank" rel="noopener noreferrer">CSS gradient generator</a></li>
+                <li>Tworzenie ruchu na stronie <a href="https://easingwizard.com/" target="_blank" rel="noopener noreferrer">Easing Wizard</a></li>
+                
+                
+              </ul>
+            </div>
+          </div>
+          <div class="callout">
+            <strong>Ostatnia aktualizacja:</strong> 4.04.2026
+          </div>
+        </div>
+      </div>
+    </section>
+
+  <div id="struktura"><br/><br/><br/><br/></div>
+    <!--Czwarty panel-->
+    <section >
+      <div class="kicker">4 / tutoriale / </div>
+      <div class="hero-grid">
+        <div>
+          <h1>Tutoriale</h1>
+          <p class="lede">Linki do interesujących tutoriali, umożliwiających rozwinięcie umiejętności kodowania. I cóż, że po angielsku :)...</p>
+          <!--
+          <div class="chips">
+            <span class="chip">Tu bym wstawił linki</span>
+            <span class="chip">:focus-visible</span>
+            <span class="chip">:checked</span>
+            <span class="chip">:nth-child()</span>
+            <span class="chip">:not()</span>
+            <span class="chip">:is()</span>
+            <span class="chip">:where()</span>
+            
+          </div>
+          -->
+        </div>
+          <div>
+            <div>
+              <ul>
+                <li>Bardzo dobre źródło tutoriali licznych <a href="https://developer.mozilla.org/en-US/" target="_blank" rel="noopener noreferrer">Mozilla Developers Network Web Docs</a></li>
+                <li>Inne doskonałe źródło tutoriali licznych <a href="https://www.w3schools.com/" target="_blank" rel="noopener noreferrer">W3Schools</a></li>
+                <li>Wprowadzenie do teorii kolorów w kontekscie tworzenia stron <a href="https://tallys.github.io/color-theory/" target="_blank" rel="noopener noreferrer">Practical Color Theory for People Who Code</a></li>
+                <li>Tutoriale <a href="https://www.tutorialspoint.com/" target="_blank" rel="noopener noreferrer">tutorialspoint.com</a></li>
+                <li>Kursy <a href="https://www.codecademy.com/catalog/language/html-css" target="_blank" rel="noopener noreferrer">Code Academy</a></li>
+                <li>Tutoriale (należy założyć konto) <a href="https://www.freecodecamp.org/" target="_blank" rel="noopener noreferrer">Free Code Camp</a></li>
+                <li>Platforma tutoriali i nie tylko <a href="https://htmldog.com/" target="_blank" rel="noopener noreferrer">HTML Dog</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="callout">
+            <strong>Ostatnia aktualizacja:</strong> 5.04.2026”</em>
+            
+          </div>
+        </div>
+      </div>
+    </section>  
+
+  <div id="nowoczesne"><br/><br/><br/><br/></div>
+    <!--Piąty panel-->
+    <section >
+      <div class="kicker">5 / praktyka / </div>
+      <div class="hero-grid">
+        <div>
+          <h1>Praktyka</h1>
+          <p class="lede">Kawałki kodu interesujące i inspirujące do nauki, wraz z żywymi przykładami...</p>
+          <!--
+          <div class="chips">
+            <span class="chip">Tu bym wstawił linki</span>
+            <span class="chip">:focus-visible</span>
+            <span class="chip">:checked</span>
+            <span class="chip">:nth-child()</span>
+            <span class="chip">:not()</span>
+            <span class="chip">:is()</span>
+            <span class="chip">:where()</span>
+            
+          </div>
+          -->
+        </div>
+          <div>
+            <div>
+              <ul>
+                
+                <li>Interesujące przykłady gotowych rozwiązań, wraz z wyjaśnieniem <a href="https://codingstella.com/" target="_blank" rel="noopener noreferrer">Coding Stella</a></li>
+                <li>Kolejne przykłady gotowych rozwiązań, wraz z wyjaśnieniem <a href="https://codebygaurav.in/" target="_blank" rel="noopener noreferrer">CodeByGaurav</a></li>
+                <li>Przykłady animacji tekstowych <a href="https://prismic.io/blog/css-text-animations#animatecss" target="_blank" rel="noopener noreferrer">CSS Text Animations</a></li>
+                <li>Przykłady efektów hover <a href="https://www.proglobalbusinesssolutions.com/css-hover-effects/" target="_blank" rel="noopener noreferrer">Top 42 CSS Hover Effects</a></li>
+                <li>Zestaw różnych przykładów CSS <a href="https://github.com/HubSpotContentOffers?hubs_signup-url=blog.hubspot.com/website/css-animation-examples&hubs_signup-cta=submit&hubs_post=blog.hubspot.com/website/css-animation-examples&hubs_post-cta=submit" target="_blank" rel="noopener noreferrer">HubSpot</a></li>
+                <li>Przykłady rozwiązań CSS <a href="https://freefrontend.com/css-code-examples/" target="_blank" rel="noopener noreferrer">CSS Examples</a></li>
+                <li>Przykłady efektów CSS <a href="https://cssfx.netlify.app/" target="_blank" rel="noopener noreferrer">CSSFX</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="callout">
+            <strong>Ostatnia aktualizacja:</strong> 5.04.2026
+          </div>
+        </div>
+      </div>
+    </section>
+
+  <div id="praktyka"><br/><br/><br/><br/></div>
+    <!--Szósty panel-->
+    <section >
+      <div class="kicker">6 / dodatkowe / </div>
+      <div class="hero-grid">
+        <div>
+          <h1>Zagadnienia dodatkowe</h1>
+          <p class="lede">Zagadnienia i ćwiczenia praktyczne dla osób, pragnących poszerzyć swoją wiedzę i umiejętności...</p>
+          <!--
+          <div class="chips">
+            <span class="chip">Tu bym wstawił linki</span>
+            <span class="chip">:focus-visible</span>
+            <span class="chip">:checked</span>
+            <span class="chip">:nth-child()</span>
+            <span class="chip">:not()</span>
+            <span class="chip">:is()</span>
+            <span class="chip">:where()</span>
+            
+          </div>
+          -->
+        </div>
+          <div>
+            <div>
+              <ul>
+                <li>Teoria: nowe pseudoklasy [PDF] <button class="chip butt"><a href="downloads/dodatkowe/PseudoklasyNOWE.pdf" download>Pobierz</a></button></li>
+                <li>Praktyka: zadania związane z pseudoklasami [ZIP] <button class="chip butt"><a href="downloads/dodatkowe/Zad__pseudoklasy.zip" download>Pobierz</a></button></li>
+              </ul>
+            </div>
+          </div>
+          <div class="callout">
+            <strong>Ostatnia aktualizacja:</strong> 6.04.2026
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
+    <footer>
+      Materiały demonstracyjne CSS — na potrzeby zajęć Projekty internetowe.
+    </footer>
+  </main>
+</body>
+</html>
